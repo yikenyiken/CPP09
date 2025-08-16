@@ -1,0 +1,44 @@
+vec before pair sort
+8, 2, 0, 9, 3, 1, 5, 
+size: 7
+level: 0
+pair_size: 1
+start_offset: 0
+step: 1
+last_current_winner: 0
+
+current_winner 2 - next_winner 8
+current_winner 9 - next_winner 0
+current_winner 1 - next_winner 3
+current_winner 0 - next_winner 5
+current_winner 0 - next_winner 0
+
+vec after pair sort: 
+2
+8
+0
+9
+1
+3
+0
+vec before pair sort
+2, 8, 0, 9, 1, 3, 0, 
+size: 7
+level: 1
+pair_size: 2
+start_offset: 1
+step: 2
+last_current_winner: 0
+
+current_winner 9 - next_winner 8
+current_winner 0 - next_winner 3
+current_winner 0 - next_winner 0
+
+vec after pair sort: 
+2
+8
+0
+9
+0
+0
+0
