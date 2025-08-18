@@ -26,7 +26,7 @@ int	j(unsigned int x)
 	return (j(x - 1) + 2 * j(x - 2));
 }
 
-std::vector<int>	js_seq_gen(int bound)
+std::vector<int>	js_seq_gen(size_t bound)
 {
 	std::vector<int> seq;
 
@@ -46,7 +46,7 @@ std::vector<int>	js_seq_gen(int bound)
 
 void	mergeInsertionSort(std::vector<int> &vec)
 {
-	std::vector<std::vector<int>::iterator> losers;
+	std::vector<std::vector<int>::iterator> winners;
 
 	cout << endl; cout << "vec before pair sort\n";
 	for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it)
@@ -73,8 +73,6 @@ void	mergeInsertionSort(std::vector<int> &vec)
 	cout << "loser_count: " << loser_count << endl;
 	cout << "is_pend_found: " << is_pend_found << endl;
 
-	int smallest_winner = INT_MAX; // ff
-
 	cout << endl;
 	for (std::vector<int>::iterator it = vec.begin() + start_offset; it != vec.end(); it += step)
 	{
@@ -82,11 +80,11 @@ void	mergeInsertionSort(std::vector<int> &vec)
 		std::vector<int>::iterator next_winner = current_winner + step;
 		cout << "current_winner " << *(current_winner) << " - next_winner "  << *(next_winner) << endl;
 
+		
 		if (*(current_winner) > *(next_winner))
 			std::swap_ranges(current_winner - (pair_size - 1), current_winner + 1, next_winner - (pair_size - 1)); // swap by pair size
-	
-		if (smallest_winner > *next_winner)
-			smallest_winner = *next_winner;
+
+		winners.push_back(next_winner);
 
 		if (current_winner == last_current_winner)
 			break ;
@@ -96,39 +94,27 @@ void	mergeInsertionSort(std::vector<int> &vec)
 
 	++level;
 
-	cout << endl; cout << "losers: " << endl;
-	for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); it += 1 << level)
-	{
-		cout << *it << ", ";
-		losers.push_back(it);
-
-		if (it == vec.begin() + (loser_count * (1 << level)) - (1 << level))
-			break ;
-	} cout << endl;
-
 	// comparing implies the compared are forming a pair
 	// the above is the equivalent of creating pairs of size pair_size * 2
 
 	if (n / (1 << level) > 1) // stop when a single pair is left
 		mergeInsertionSort(vec);
 
-	cout << "## level with pair size " << pair_size << " ##" << endl;
-
-	cout << "smallest winner " << smallest_winner << endl;
-
-	cout << "vec after recursion: " << endl;
-	for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it)
-		cout << *it << endl;
-
 	// insertion here
+	cout << endl; cout << "## insertion for pair_size " << pair_size << endl;
 
-	cout << "loser_count: " << loser_count << endl;
-	cout << "is_pend_found: " << is_pend_found << endl;
+	cout << "winners :" << endl;
+	for (std::vector<std::vector<int>::iterator>::iterator it = winners.begin(); it != winners.end(); ++it)
+		cout << *(*it) << ", ";
 
 	if (loser_count != 1) // == 1 loser already in place
 	{
+		std::vector<int> seq = js_seq_gen(winners.size() - 1);
 
-		
+		for (std::vector<int>::iterator it = seq.begin(); it != seq.end(); ++it)
+		{
+			
+		}
 	}
 
 	if (is_pend_found)
