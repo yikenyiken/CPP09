@@ -9,7 +9,8 @@ void	mergeInsertionSort(std::vector<int> &vec);
 
 int main() {
 	
-	std::array<int, 7> arr = {0, 9, 8, 2, 3, 1, 6};
+	// std::array<int, 7> arr = {0, 9, 8, 2, 3, 1, 6};
+	std::array<int, 7> arr = {2, 4, 6, 1, 5, 8, 7};
 	std::vector<int> vec;
 
 	for (std::array<int, 10>::iterator it = arr.begin(); it != arr.end(); ++it)

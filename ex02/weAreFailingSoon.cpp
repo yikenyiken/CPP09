@@ -156,10 +156,8 @@ void	mergeInsertionSort(std::vector<int> &vec)
 				continue ;
 			}
 
-			*it = *it > bound ? bound : *it;
-
 			// SEQUENCE FALLBACK UNTIL PERVIOUS J(N)
-			for (int windex = *it + insertCount; windex != prev + insertCount;)
+			for (int windex = *it + insertCount; windex != prev;)
 			{
 				int													optLen = ft_pow(2, ft_log2(windex + insertCount + 1)) - 1; // requirement: fallback if toInsert < first at optLen of winners
 				int													tries;
@@ -169,10 +167,13 @@ void	mergeInsertionSort(std::vector<int> &vec)
 				std::vector<int>::iterator							toinsert = *(winsert) - pair_size;
 				std::vector<std::vector<int>::iterator>::iterator	comp;
 
+				windex = windex > bound ? bound : windex;
+
 				cout << "starting at j(n): " << *it << endl;
 				cout << "inserting pair of winners' member at index: " << windex << endl;
 				cout << "inserting: " << *toinsert << endl;		
 				cout << "optimal length: " << optLen  << endl;
+
 
 
 
@@ -198,41 +199,39 @@ void	mergeInsertionSort(std::vector<int> &vec)
 				isBehindInsertion = *toinsert < *(*comp);
 
 				if (isBehindInsertion)
-					winners.insert(comp, toinsert);
+				{
+					cout << "inserting range " << *(toinsert - (pair_size - 1)) << "-" << *(toinsert + 1) << " behind " << *(*comp) << endl;
+
+					std::rotate(*comp, toinsert - (pair_size - 1), toinsert + 1);
+				}
 				else
-					winners.insert(comp + 1, toinsert);
-
-
-				// if (isBehindInsertion)
-				// {
-				// 	cout << "inserting range " << *(toinsert - (pair_size - 1)) << "-" << *(toinsert + 1) << " behind " << *(*comp) << endl;
-
-				// 	std::rotate(*comp, toinsert - (pair_size - 1), toinsert + 1);
-				// }
-				// else
-				// {
-				// 	cout << "inserting range " << *(toinsert - (pair_size - 1)) << "-" << *(toinsert + 1) << " after " << *(*comp) << endl;
+				{
+					cout << "inserting range " << *(toinsert - (pair_size - 1)) << "-" << *(toinsert + 1) << " after " << *(*comp) << endl;
 				
-				// 	std::rotate(*comp + 1, toinsert - (pair_size - 1), toinsert + 1);
-				// }
+					std::rotate(*comp + 1, toinsert - (pair_size - 1), toinsert + 1);
+				}
 
-				// cout << "winners before re-arrange: ";
-				// for (std::vector<std::vector<int>::iterator>::iterator it = winners.begin(); it != winners.end(); ++it)
-				// 	cout << *(*it) << ", ";
-				// cout << endl;
+				cout << "winners before re-arrange: ";
+				for (std::vector<std::vector<int>::iterator>::iterator it = winners.begin(); it != winners.end(); ++it)
+					cout << *(*it) << ", ";
+				cout << endl;
 
-				// for (std::vector<std::vector<int>::iterator>::iterator it = isBehindInsertion ? comp : comp + 1; it != winsert; ++it) // re-arrange winners
-				// {
-				// 	cout << "started shifting from: " << *(*it) << endl;
-				// 	*it = *it + pair_size;
-				// }
+				for (std::vector<std::vector<int>::iterator>::iterator it = isBehindInsertion ? comp : comp + 1; it != winsert; ++it) // re-arrange winners
+				{
+					cout << "started shifting from: " << *(*it) << endl;
+					*it = *it + pair_size;
+				}
 
-				// cout << "winners after re-arrange: ";
-				// for (std::vector<std::vector<int>::iterator>::iterator it = winners.begin(); it != winners.end(); ++it)
-				// 	cout << *(*it) << ", ";
-				// cout << endl;
+				cout << "winners after re-arrange: ";
+				for (std::vector<std::vector<int>::iterator>::iterator it = winners.begin(); it != winners.end(); ++it)
+					cout << *(*it) << ", ";
+				cout << endl;
 
-				// took insertion to winner from here
+				if (isBehindInsertion)
+					winners.insert(comp, *comp - pair_size);
+				else
+					winners.insert(comp + 1, *comp + pair_size);
+
 
 				cout << "winners after insertion: ";
 				for (std::vector<std::vector<int>::iterator>::iterator it = winners.begin(); it != winners.end(); ++it)
@@ -240,8 +239,9 @@ void	mergeInsertionSort(std::vector<int> &vec)
 				cout << endl;
 
 				++insertCount;
+				++prev;
 			}
-			prev = *it + insertCount;
+			prev += insertCount; // not sure about this
 		}
 	}
 
