@@ -1,10 +1,10 @@
-NAME =	a.out
+NAME =	PmergeMe
 
-SRCS =	main.cpp mergeInsertSort.cpp
+SRCS =	main.cpp mergeInsertionSort_v.cpp mergeInsertionSort_d.cpp math.cpp utils_v.cpp utils_d.cpp PmergeMe.cpp
 
 CXX =	c++
 
-INCLUDE = mergeInsertSort.h mergeInsertSort.hpp
+INCLUDE = mergeInsertionSort_v.h mergeInsertionSort_d.h mergeInsertionSort.hpp PmergeMe.hpp
 
 FLAGS =	-Werror -Wall -Wextra -std=c++98
 
