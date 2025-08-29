@@ -1,5 +1,0 @@
-weAreFailingSoon.cpp:1:18: warning: extra tokens at end of #include directive [-Wextra-tokens]
-#include <vector>>
-                 ^
-                 //
-1 warning generated.

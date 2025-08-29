@@ -1,5 +1,4 @@
 #include "PmergeMe.hpp"
-#include <_ctype.h>
 #include <cerrno>
 #include <climits>
 #include <iostream>
@@ -58,7 +57,6 @@ void	parse(int ac, char **av)
 
 int main(int ac, char **av) {
 
-	PmergeMe			hero;
 	std::vector<int>	vec;
 	std::deque<int>		deq;
 	size_t				timeBeforeSort;
@@ -78,7 +76,7 @@ int main(int ac, char **av) {
 	for (int i = 1; i < ac; ++i)
 		deq.push_back(std::atoi(av[i]));
 
-	hero.mergeInsertionSort(deq);
+	PmergeMe::mergeInsertionSort(deq);
 
 	timeSpent = (getTime() - timeBeforeSort) / static_cast<double>(1000);
 
@@ -94,9 +92,9 @@ int main(int ac, char **av) {
 	timeBeforeSort = getTime();
 
 	for (int i = 1; i < ac; ++i)
-		vec.push_back(std::atoi(av[i])); // protect conversion ?
+		vec.push_back(std::atoi(av[i]));
 
-	hero.mergeInsertionSort(vec);
+	PmergeMe::mergeInsertionSort(vec);
 
 	timeSpent = (getTime() - timeBeforeSort) / static_cast<double>(1000);
 

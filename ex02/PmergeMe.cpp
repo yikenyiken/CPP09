@@ -1,6 +1,5 @@
 #include "PmergeMe.hpp"
 #include "mergeInsertionSort.hpp"
-#include <iostream>
 #include <vector>
 
 PmergeMe::PmergeMe()
@@ -23,7 +22,7 @@ PmergeMe::~PmergeMe()
 
 PmergeMe	&PmergeMe::operator = (const PmergeMe &rhs) 
 {
-	(void)rhs;
+	static_cast<void>(rhs);
 
 	return (*this);
 }

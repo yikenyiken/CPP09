@@ -10,9 +10,9 @@ class PmergeMe
 		PmergeMe(const PmergeMe &other);
 		~PmergeMe();
 
-		PmergeMe	&operator = (const PmergeMe &rhs);
-		void		mergeInsertionSort(std::vector<int> &);
-		void		mergeInsertionSort(std::deque<int> &);
+		PmergeMe		&operator = (const PmergeMe &rhs);
+		static void		mergeInsertionSort(std::vector<int> &);
+		static void		mergeInsertionSort(std::deque<int> &);
 };
 
 #endif

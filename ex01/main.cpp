@@ -1,39 +1,17 @@
 #include <iostream>
+#include "RPN.hpp"
 
-#define ADDOP '+'
-#define SUBTROP '-'
-
-using namespace std;
-
-#include <stack>
-
-
-
-int	calc(std::stack<int> &a, std::stack<int> &b)
-{
+int main(int ac, char **av) {
 	
-}
+	if (ac != 2)
+	{
+		std::cerr << "Usage: ./RPN <formula>" << std::endl;
+		return (1);
+	}
 
-int main() {
+	RPN	rpn(av[1]);
 	
-	std::stack<int> a;
-	std::stack<char> b;
+	rpn.evaluate();
 
-	// - +
-	// 8 3 9
-	// 9 3 + 8 -
-
-	// (9 + 3) - 8
-	// 12 - 8 = 4
-
-	// going and pushing ...
-	// 
-
-	a.push(9);
-	a.push(3);
-	a.push(8);
-
-	b.push(ADDOP);
-	b.push(SUBTROP);
-	return 0;
+	return (0);
 }

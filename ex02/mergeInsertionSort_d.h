@@ -14,7 +14,7 @@ int	ft_pow(int x, int y);
 // utils
 int					getLastCurrentPos(int total, int pair_size);
 size_t				getEquivalentPos(iter needle, std::deque<iter> haystack);
-std::deque<int>	js_seq_gen(size_t bound);
+std::deque<int>		js_seq_gen(size_t bound);
 iterIters			getLastComp(iterIters insertBound, iter toinsert, int optlen);
 void				pairMake(std::deque<int> &vec, std::deque<iter> &winners, int pair_size, int n);
 void				mapStoVec(std::deque<iter> &S, std::deque<int> &vec, int pair_size);
